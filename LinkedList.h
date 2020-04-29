@@ -17,12 +17,16 @@ public:
     LinkedList();
     void append(int);
     void remove(int);
-    void remove(Node*);
-    Node* listThird(Node*) const;
+    //void remove(Node*);
+   // Node* listThird(Node*) const;
     void printAll() const;
     int getSize() const ;
     void setSize(int);
     Node* getHead() const ;
+
+    Node *findNode(int val) const;
+
+    void startExecution(int startingPoint);
 };
 
 #endif //JOSEPHUS_LINKEDLIST_H

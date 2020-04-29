@@ -9,7 +9,6 @@ Node *LinkedList::getHead() const {
     return this->head;
 }
 
-
 LinkedList::LinkedList() {
     this->head = new Node();
     this->head->setNext(nullptr);
@@ -22,7 +21,7 @@ void LinkedList::append(int mval) {
 
     Node *mNode = new Node();
     mNode->setVal(mval);
-    if (head->getNext() == nullptr) {
+    if (head->getNext() == nullptr) { //check if there is only the head in the list
         head->setNext(mNode);
         mNode->setNext(head);
     } else {
@@ -34,7 +33,7 @@ void LinkedList::append(int mval) {
         mNode->setNext(head);
     }
 
-    this->size += 1;
+    this->size += 1; //after adding the node it is
 }
 
 void LinkedList::printAll() const {
@@ -44,7 +43,6 @@ void LinkedList::printAll() const {
         lNode = lNode->getNext();
     }
     std::cout << std::endl;
-
 }
 
 int LinkedList::getSize() const {
@@ -62,8 +60,8 @@ void LinkedList::remove(int val) {
         for (int i = 1; i < this->size; i++) {
             auxNode =auxNode->getNext();
         }
-        // I am at last node
-        auxNode->setNext(lNode->getNext()); // this points to 2nd element
+        // this for is to get from the first node to the one with the required value
+        auxNode->setNext(lNode->getNext()); // this points to the node after
         this->head = lNode->getNext();
         delete (lNode);
     } else {
@@ -79,5 +77,23 @@ void LinkedList::remove(int val) {
     }
 
     this->size-=1;
+}
 
+
+
+Node* LinkedList::findNode(int val) const { //Finds a node using it's value and returns it
+    Node* temp = getHead();
+    while(temp->getVal() != val){
+        temp = temp->getNext();
+    }
+    return temp;
+}
+
+
+void LinkedList::startExecution(int startingPoint) { //This is the main part of the program.
+    Node *executioner = this->findNode(startingPoint); //currentExecutioner is, as the variable says, the executioner, in the beginning from the starting point node.
+    while (this->size > 1) { //This will run until the list is of size 1.
+            this->remove(executioner->getNext()->getVal()); //Removes the node after it.
+            executioner = executioner->getNext(); //And changes the executioner.
+    }
 }
