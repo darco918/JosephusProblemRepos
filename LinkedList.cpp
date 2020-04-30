@@ -81,19 +81,22 @@ void LinkedList::remove(int val) {
 
 
 
-Node* LinkedList::findNode(int val) const { //Finds a node using it's value and returns it
-    Node* temp = getHead();
-    while(temp->getVal() != val){
-        temp = temp->getNext();
+Node* LinkedList::findNode(int val) const {
+    Node* currentNode = getHead();
+
+    while(currentNode->getVal() != val){
+        currentNode = currentNode->getNext();
     }
-    return temp;
+
+    return currentNode;
 }
 
 
-void LinkedList::startExecution(int startingPoint) { //This is the main part of the program.
-    Node *executioner = this->findNode(startingPoint); //currentExecutioner is, as the variable says, the executioner, in the beginning from the starting point node.
-    while (this->size > 1) { //This will run until the list is of size 1.
-            this->remove(executioner->getNext()->getVal()); //Removes the node after it.
-            executioner = executioner->getNext(); //And changes the executioner.
+void LinkedList::startExecution(int startingPoint) {
+    Node *executioner = this->findNode(startingPoint);
+
+    while (this->size > 1) {
+            this->remove(executioner->getNext()->getVal());
+            executioner = executioner->getNext();
     }
 }
